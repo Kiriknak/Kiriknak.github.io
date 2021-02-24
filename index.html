@@ -26,7 +26,7 @@
                                 class="form-control"
                                 placeholder="Leave a comment here"
                                 id="taInput"
-                                style="height: 600px" ></textarea>
+                                style="height: 600px" onchange="javascript:gatot();"></textarea>
                             <label for="taInput" >Input</label>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
     <script>
         function gatot() {
             let str=document.getElementById('taInput').value
-            let strRes=str.replace("\t",",")
+            let strRes=str.replaceAll("\t",",")
             document.getElementById('taOutput').value=strRes
         }
     </script>
