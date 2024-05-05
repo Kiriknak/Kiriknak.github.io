@@ -1,74 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base64 to Hex and Vice Versa Converter</title>
-    <!-- Add Bootstrap CSS (you can link to a CDN or use a local file) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parser Format</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Base64 to Hex and Vice Versa Converter</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="base64Input">Base64 Input:</label>
-                    <textarea class="form-control" id="base64Input" rows="5"></textarea>
-                </div>
-                <button class="btn btn-primary" onclick="convertBase64ToHex()">Convert to Hex</button>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="hexInput">Hex Input:</label>
-                    <textarea class="form-control" id="hexInput" rows="5"></textarea>
-                </div>
-                <button class="btn btn-primary" onclick="convertHexToBase64()">Convert to Base64</button>
-            </div>
-        </div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col">
+        <textarea id="inputText" class="form-control" placeholder="Masukkan teks di sini..." rows="5"></textarea>
+      </div>
+      <div class="col">
+        <textarea id="outputText" class="form-control" placeholder="Hasil akan muncul di sini..." rows="5" readonly></textarea>
+      </div>
     </div>
+    <div class="row mt-3">
+      <div class="col">
+        <button id="parseBtn" class="btn btn-primary">Parse</button>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        function convertBase64ToHex() {
-            const base64Input = document.getElementById("base64Input").value;
-            try {
-                const decodedData = atob(base64Input);
-                const hexResult = stringToHex(decodedData);
-                document.getElementById("hexInput").value = hexResult;
-            } catch (error) {
-                alert("Invalid Base64 input.");
-            }
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Function to parse input text
+    function parseText() {
+      const inputText = document.getElementById('inputText').value.trim();
+      const lines = inputText.split('\n');
+      let output = '';
+
+      lines.forEach(line => {
+        const parts = line.split(':');
+        if (parts.length === 4) {
+          const hostname = parts[0];
+          const port = parts[1];
+          const username = parts[2];
+          const password = parts[3];
+
+          output += `socks5://${username}:${password}@${hostname}:${port}\n`;
         }
+      });
 
-        function convertHexToBase64() {
-            const hexInput = document.getElementById("hexInput").value;
-            try {
-                const decodedData = hexToString(hexInput);
-                const base64Result = btoa(decodedData);
-                document.getElementById("base64Input").value = base64Result;
-            } catch (error) {
-                alert("Invalid Hex input.");
-            }
-        }
+      document.getElementById('outputText').value = output;
+    }
 
-        function stringToHex(str) {
-            let hex = '';
-            for (let i = 0; i < str.length; i++) {
-                hex += str.charCodeAt(i).toString(16).padStart(2, '0');
-            }
-            return hex;
-        }
-
-        function hexToString(hex) {
-            let str = '';
-            for (let i = 0; i < hex.length; i += 2) {
-                str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-            }
-            return str;
-        }
-    </script>
-
-    <!-- Add Bootstrap JS (you can link to a CDN or use a local file) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    // Add event listener to the parse button
+    document.getElementById('parseBtn').addEventListener('click', parseText);
+  </script>
 </body>
 </html>
